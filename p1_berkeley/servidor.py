@@ -1,7 +1,5 @@
 import socket
-import threading
-import time
-import signal
+import threading 
 
 class Servidor:
     def __init__(self, host, port):

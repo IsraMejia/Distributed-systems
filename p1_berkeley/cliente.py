@@ -1,7 +1,5 @@
 import socket
-import threading
-import time
-import signal
+import threading 
 
 class Cliente:
     def __init__(self, host, port):
@@ -17,7 +15,7 @@ class Cliente:
         # Iniciar un hilo para manejar la recepción de mensajes del servidor
         recibir_thread = threading.Thread(target=self.recibir_mensajes)
         recibir_thread.start()
-        print("(cliente): Conectado al servidor. Puedes empezar a enviar mensajes.")
+        print("(cliente): Conectado al servidor. Estoy listo para poder enviar mensajes.")
 
     def recibir_mensajes(self):
         while self.running:
@@ -35,7 +33,7 @@ class Cliente:
     def desconectar(self):
         self.running = False
         self.client_socket.close()
-        print("(cliente): Desconectado del servidor.")
+        print("(cliente): Desconectado del servidor. Fin ded la comunicacion.")
 
 def main():
     host = '127.0.0.1'  # Dirección IP del servidor
