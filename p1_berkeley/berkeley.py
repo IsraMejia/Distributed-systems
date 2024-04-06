@@ -41,12 +41,13 @@ def main():
 
     # Realizar la sincronización al menos 3 veces
     for iteration in range(1, 4):
-        print(f"Iteración {iteration} de sincronización:")
+        print(f"\n\n\tIteración {iteration} de sincronización:")
         # El maestro (primer cliente) recoge los tiempos de todos los clientes
         times = [cliente.get_time() for cliente in clientes]
         print("Tiempos de los clientes:")
         for i, t in enumerate(times):
-            print(f"Cliente {i}: {time.strftime('%H:%M:%S', time.localtime(t))}")
+            num_cliente = i+1
+            print(f"Cliente {num_cliente}: {time.strftime('%H:%M:%S', time.localtime(t))}")
 
         # El maestro calcula el tiempo medio
         average_time = sum(times) / len(times)
@@ -55,7 +56,7 @@ def main():
         # El maestro envía el tiempo medio a todos los clientes
         for cliente in clientes:
             cliente.adjust_time(average_time)
-            print(f"Cliente {clientes.index(cliente)} ajustó su reloj a {time.strftime('%H:%M:%S', time.localtime(cliente.get_time()))}")
+            print(f"Cliente {(clientes.index(cliente))+1} ajustó su reloj a {time.strftime('%H:%M:%S', time.localtime(cliente.get_time()))}")
 
         time.sleep(1)  # Esperar un segundo antes de la próxima sincronización
 
