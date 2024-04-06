@@ -12,9 +12,16 @@ class BerkeleyClient(Cliente):
 
     def adjust_time(self, new_time):
         self.time_offset = new_time - time.time()
+        print(f"Ofset cliente: {self.time_offset }")
 
     def get_time(self):
+        #print(f"Sumando al tiempo del cliente su respectivo Ofset cliente: {self.time_offset }")
         return time.time() + self.time_offset
+    
+    def get_final_time(self):
+        print(f"Sumando al tiempo del cliente su respectivo Offset cliente: {self.time_offset }")
+        return time.time() + self.time_offset
+    
 
     def recibir_mensajes(self):
         while self.running:
@@ -38,7 +45,7 @@ def main():
     # Iniciar el servidor en un hilo
     servidor_thread = threading.Thread(target=servidor.iniciar)
     servidor_thread.start()
-
+    print("\n\n\n Iniciando algoritmo")
     # Realizar la sincronización al menos 3 veces
     for iteration in range(1, 4):
         print(f"\n\n\tIteración {iteration} de sincronización:")
@@ -56,7 +63,7 @@ def main():
         # El maestro envía el tiempo medio a todos los clientes
         for cliente in clientes:
             cliente.adjust_time(average_time)
-            print(f"Cliente {(clientes.index(cliente))+1} ajustó su reloj a {time.strftime('%H:%M:%S', time.localtime(cliente.get_time()))}")
+            print(f"Cliente {(clientes.index(cliente))+1} ajustó su reloj a {time.strftime('%H:%M:%S', time.localtime(cliente.get_final_time()))}")
 
         time.sleep(1)  # Esperar un segundo antes de la próxima sincronización
 
